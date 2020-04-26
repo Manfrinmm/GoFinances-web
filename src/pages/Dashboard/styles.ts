@@ -91,5 +91,19 @@ export const TableContainer = styled.section`
     td:last-child {
       border-radius: 0 8px 8px 0;
     }
+
+    button {
+      border: 0;
+      background: #eee;
+      padding: 4px;
+      border-radius: 8px;
+      color: #363f5f;
+
+      transition: color 0.4s;
+
+      &:hover {
+        color: #ff872c;
+      }
+    }
   }
 `;

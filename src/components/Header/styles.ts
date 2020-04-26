@@ -1,7 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import { Link as RouterLink } from 'react-router-dom';
 
 interface ContainerProps {
   size?: 'small' | 'large';
+}
+
+interface LinkProps {
+  active?: number;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -15,22 +21,36 @@ export const Container = styled.div<ContainerProps>`
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+`;
 
-    nav {
-      a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-        transition: opacity 0.2s;
+export const Link = styled(RouterLink)<LinkProps>`
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: opacity 0.2s;
+  position: relative;
 
-        & + a {
-          margin-left: 32px;
-        }
+  /* &::after {
+    ${props =>
+      props.active &&
+      css`
+        content: '';
+      `};
 
-        &:hover {
-          opacity: 0.6;
-        }
-      }
-    }
+    position: absolute;
+    bottom: -8px;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: #ff872c;
+  } */
+
+  & + a {
+    margin-left: 32px;
+  }
+
+  &:hover {
+    opacity: 0.6;
   }
 `;
