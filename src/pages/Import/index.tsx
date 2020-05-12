@@ -24,7 +24,12 @@ const Import: React.FC = () => {
 
   async function handleUpload(): Promise<void> {
     const data = new FormData();
-    data.append('file', uploadedFiles[0].file);
+
+    if (!uploadedFiles.length) return;
+
+    const { file, name } = uploadedFiles[0];
+
+    data.append('file', file, name);
 
     try {
       await api.post('/transactions/import', data);
@@ -35,9 +40,13 @@ const Import: React.FC = () => {
   }
 
   function submitFile(files: File[]): void {
-    const { name, size } = files[0];
+    const uploadFiles = files.map(file => ({
+      file,
+      name: file.name,
+      readableSize: filesize(file.size),
+    }));
 
-    setUploadedFiles([{ file: files[0], name, readableSize: filesize(size) }]);
+    setUploadedFiles(uploadFiles);
   }
 
   return (
